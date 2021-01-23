@@ -12,7 +12,7 @@ class NoteDelete extends StatelessWidget{
 
         FlatButton(
           child: Text('Yes !'),
-          onPressed: (){ Navigator.of(context).pop();
+          onPressed: (){ Navigator.of(context).pop(true);
           },),
 
         FlatButton(
