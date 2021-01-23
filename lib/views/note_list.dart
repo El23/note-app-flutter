@@ -25,6 +25,10 @@ final notes = [
 
 ];
 
+String formatDateTime(DateTime dateTime){
+  return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,12 +43,12 @@ final notes = [
       itemBuilder: (_, index){
         return ListTile(
           title: Text(
-            'hello',
+            notes[index].noteTitle,
             style:  TextStyle(color: Theme.of(context).primaryColor),
           ),
-          subtitle: Text('last adited at..'),
+          subtitle: Text('last adited on ${formatDateTime(notes[index].latestEditDateTime)}'),
         );
-      },itemCount: 25,
+      },itemCount: notes.length,
     ),
     );
   }
