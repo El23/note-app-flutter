@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_note/models/note_for_listing.dart';
+import 'package:flutter_app_note/views/note_modify.dart';
 
 class NoteList extends StatelessWidget{
 final notes = [
@@ -35,6 +36,7 @@ String formatDateTime(DateTime dateTime){
       appBar: AppBar(title: Text('List of Notes'),),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
+          Navigator.of(context).push(MaterialPageRoute(builder: (_)=> NoteModify()));
 
         },
         child: Icon(Icons.add),
