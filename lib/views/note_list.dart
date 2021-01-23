@@ -1,34 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_note/models/note_for_listing.dart';
+import 'package:flutter_app_note/services/service_note.dart';
 import 'package:flutter_app_note/views/delete_note.dart';
 import 'package:flutter_app_note/views/note_modify.dart';
+import 'package:get_it/get_it.dart';
 
-class NoteList extends StatelessWidget{
-final notes = [
-  new NoteForListing(
-    noteID: '1',
-    createDateTime: DateTime.now(),
-    latestEditDateTime: DateTime.now(),
-    noteTitle: ' Note №1 '
-  ),
-  new NoteForListing(
-    noteID: '2',
-    createDateTime: DateTime.now(),
-    latestEditDateTime: DateTime.now(),
-    noteTitle: 'Note №2'
-  ),
-  new NoteForListing(
-    noteID: '3',
-    createDateTime: DateTime.now(),
-    latestEditDateTime: DateTime.now(),
-    noteTitle: 'Note №3'
-  )
+class NoteList extends StatefulWidget{
+//  final service = NotesService();
+  @override
+  _NoteListState createState() => _NoteListState();
+}
 
-];
+class _NoteListState extends State<NoteList> {
+NotesService get service => GetIt.I<NotesService>();
+List <NoteForListing> notes = [];
 
 String formatDateTime(DateTime dateTime){
   return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+}
+@override
+void initState(){
+  notes= service.getNotesList();
+  super.initState();
 }
 
   @override
@@ -65,7 +59,7 @@ String formatDateTime(DateTime dateTime){
             ),
           ),
           child: ListTile(
-            
+
             title: Text(
               notes[index].noteTitle,
               style:  TextStyle(color: Theme.of(context).primaryColor),
