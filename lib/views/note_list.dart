@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_note/models/note_for_listing.dart';
+import 'package:flutter_app_note/views/delete_note.dart';
 import 'package:flutter_app_note/views/note_modify.dart';
 
 class NoteList extends StatelessWidget{
@@ -43,15 +44,30 @@ String formatDateTime(DateTime dateTime){
       ),body: ListView.separated(
       separatorBuilder: (_,__) => Divider(height: 1, color: Colors.black38,),
       itemBuilder: (_, index){
-        return ListTile(
-          title: Text(
-            notes[index].noteTitle,
-            style:  TextStyle(color: Theme.of(context).primaryColor),
-          ),
-          subtitle: Text('last adited on ${formatDateTime(notes[index].latestEditDateTime)}'),
-          onTap: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (_)=>NoteModify(noteID: notes[index].noteID)));
+        return Dismissible(
+          key: ValueKey(notes[index].noteID),
+          direction: DismissDirection.startToEnd,
+          onDismissed: (direction){
+
           },
+          // ignore: missing_return
+          confirmDismiss: (direction) async{
+           final result = await showDialog(
+              context: context,
+              builder: (_)=> NoteDelete()
+            );return result;
+          },
+          child: ListTile(
+            
+            title: Text(
+              notes[index].noteTitle,
+              style:  TextStyle(color: Theme.of(context).primaryColor),
+            ),
+            subtitle: Text('last adited on ${formatDateTime(notes[index].latestEditDateTime)}'),
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (_)=>NoteModify(noteID: notes[index].noteID)));
+            },
+          ),
         );
       },itemCount: notes.length,
     ),
