@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NoteModify extends StatelessWidget{
+  final String noteID;
+  NoteModify({this.noteID});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('create some note')),
+      appBar: AppBar(title: Text(noteID ==null? 'Create  note': ' Edit note')),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(

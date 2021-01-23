@@ -49,6 +49,9 @@ String formatDateTime(DateTime dateTime){
             style:  TextStyle(color: Theme.of(context).primaryColor),
           ),
           subtitle: Text('last adited on ${formatDateTime(notes[index].latestEditDateTime)}'),
+          onTap: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (_)=>NoteModify(noteID: notes[index].noteID)));
+          },
         );
       },itemCount: notes.length,
     ),
