@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 
 class NoteModify extends StatelessWidget{
   final String noteID;
+  bool get isEditing => noteID !=null;
   NoteModify({this.noteID});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(noteID ==null? 'Create  note': ' Edit note')),
+      appBar: AppBar(title: Text(isEditing ? 'Edit note': ' Create note')),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -36,6 +37,11 @@ class NoteModify extends StatelessWidget{
                   color: Colors.blue,
 
                   onPressed:(){
+                if(isEditing){
+
+                }else{
+
+                }
                 Navigator.of(context).pop();
 
               }),
